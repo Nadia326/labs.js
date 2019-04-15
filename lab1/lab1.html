@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lab1</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <form id='app'>
+            <input v-model="message" placeholder="Введите Ваше имя">
+            <p>Привет {{ message ? message : 'незнакомец' }}</p>
+
+            <ul>
+                <li v-for="(breed, key) in breeds">
+                    {{ key }}
+                    <ul v-if="breed.length > 0">
+                     <li v-bind:style="{color: subbreedColor}"  v-for="subbreed in breed">
+                        {{subbreed}}
+                     </li>
+                    </ul>
+                
+                </li>
+            </ul>
+            <button v-on:click="show">Случайная порода с подпородами</button>
+            <transition v-if="show">
+                <ul > 
+                    <li v-for="(value, key) in showRandom(showWithSubbreeds(breeds))">
+                    {{key}}
+                    <ul>
+                    <li v-bind:style="{color: subbreedColor}" v-for="subbreed in value">
+                    {{subbreed}}  
+                    </li>
+                    </ul>
+                </li>
+                </ul>   
+            </transition>
+            <button v-on:click="addf">Добавить</button>
+            <button v-on:click="remove">Удалить</button>
+            <button v-on:click="shuffle(newlist)">Перемешать</button>
+            <transition v-if="add">
+                <ul>
+                <li v-for="element in newlist">{{element}}</li>
+                </ul>
+            </transition>
+        </form>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="script.js"></script>
+</html>
