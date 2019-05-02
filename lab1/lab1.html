@@ -20,10 +20,10 @@
                 
                 </li>
             </ul>
-            <button v-on:click="show">Случайная порода с подпородами</button>
+            <input v-on:click="generateRandomBreed" type="button" value="Случайная порода с подпородами"/>
             <transition v-if="show">
-                <ul > 
-                    <li v-for="(value, key) in showRandom(showWithSubbreeds(breeds))">
+                <ul >
+                    <li v-for="(value, key) in randomBreed">
                     {{key}}
                     <ul>
                     <li v-bind:style="{color: subbreedColor}" v-for="subbreed in value">

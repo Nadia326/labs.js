@@ -6,6 +6,7 @@ var app = new Vue({
     data: {
       message: '',
       breeds: {},
+      randomBreed: {},
       subbreedColor:'red',
       newlist:[],
       showWithSubbreeds: function(object) {
@@ -23,11 +24,17 @@ var app = new Vue({
       
     },
     methods: {
+      generateRandomBreed: function() {
+        const rand = Math.floor(Math.random() * Object.keys(this.breeds).length);
+        const key = Object.keys(this.breeds)[rand];
+        this.randomBreed = {[key]: this.breeds[key]};
+      },
       showRandom: function(object) {
         let randObject={};
         const rand = Math.floor(Math.random() * Object.keys(object).length);
         const key = Object.keys(object)[rand];
         randObject[key]=object[key];
+        console.log(randObject)
         return randObject;
       },
       getRandomFromArray: function(){
