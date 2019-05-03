@@ -1,48 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Lab1</title>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <form id='app'>
-            <input v-model="message" placeholder="Введите Ваше имя">
-            <p>Привет {{ message ? message : 'незнакомец' }}</p>
 
-            <ul>
-                <li v-for="(breed, key) in breeds">
-                    {{ key }}
-                    <ul v-if="breed.length > 0">
-                     <li v-bind:style="{color: subbreedColor}"  v-for="subbreed in breed">
+<head>
+    <title>Lab1</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <form id='app'>
+        <input v-model="message" placeholder="Введите Ваше имя">
+        <p>Привет {{ message ? message : 'незнакомец' }}</p>
+
+        <hr/>
+        <ul>
+            <li v-for="(breed, key) in breeds">
+                {{ key }}
+                <ul v-if="breed.length > 0">
+                    <li v-bind:style="{color: subbreedColor}" v-for="subbreed in breed">
                         {{subbreed}}
-                     </li>
-                    </ul>
-                
-                </li>
-            </ul>
-            <input v-on:click="generateRandomBreed" type="button" value="Случайная порода с подпородами"/>
-            <transition v-if="show">
-                <ul >
-                    <li v-for="(value, key) in randomBreed">
+                    </li>
+                </ul>
+
+            </li>
+        </ul>
+        <hr/>
+        <input v-on:click="setRandomBreed" type="button" value="Случайная порода с подпородами" />
+        <transition v-if="show">
+            <ul>
+                <li v-for="(value, key) in randomBreed">
                     {{key}}
                     <ul>
-                    <li v-bind:style="{color: subbreedColor}" v-for="subbreed in value">
-                    {{subbreed}}  
-                    </li>
+                        <li v-bind:style="{color: subbreedColor}" v-for="subbreed in value">
+                            {{subbreed}}
+                        </li>
                     </ul>
                 </li>
-                </ul>   
-            </transition>
-            <button v-on:click="addf">Добавить</button>
-            <button v-on:click="remove">Удалить</button>
-            <button v-on:click="shuffle(newlist)">Перемешать</button>
-            <transition v-if="add">
-                <ul>
-                <li v-for="element in newlist">{{element}}</li>
-                </ul>
-            </transition>
-        </form>
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="script.js"></script>
+            </ul>
+        </transition>
+
+        <hr/>
+        <input v-on:click="addRandomBreedToList" type="button" value="добавить" />
+        <input v-on:click="removeRandomBreedFromList" type="button" value="удалить" />
+        <input v-on:click="shuffleRandomBreedList" type="button" value="перемешать" />
+        <ul>
+            <li v-for="breed in randomBreedList">
+                {{Object.keys(breed)[0]}}
+            </li>
+        </ul>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </form>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="script.js"></script>
+
 </html>
